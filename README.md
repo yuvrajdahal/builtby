@@ -1,12 +1,22 @@
-# builtby
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yuvrajdahal/builtby/main/docs/logo.png" alt="builtby" width="440">
+</p>
 
-See who built which part of your UI. `git blame`, drawn on the running page.
+<p align="center">
+  <strong>See who built which part of your UI.</strong><br>
+  <code>git blame</code>, drawn on the running page. For React (Vite) and Next.js.
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/builtby"><img src="https://img.shields.io/npm/v/builtby?color=3d9bff" alt="npm version"></a>
+  <a href="https://github.com/yuvrajdahal/builtby/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/builtby?color=2fd38a" alt="MIT license"></a>
+</p>
 
 When several developers work on one frontend, it's hard to tell who made which section, button, or card.
 builtby draws a colored ring and an avatar badge around each part of the page, one color per developer,
 straight from your git history.
 
-![builtby showing three developers' work on one landing page](docs/hero.jpg)
+![builtby showing three developers' work on one landing page](https://raw.githubusercontent.com/yuvrajdahal/builtby/main/docs/hero.jpg)
 
 - **One color per developer.** Every element gets a ring and an initials badge for the person who owns most of its JSX lines.
 - **Commit details on hover.** Author, email, file and line range, ownership %, commit message, and when.
@@ -22,12 +32,12 @@ a hackathon project built by a team of developers.
 **Sections by different people.** On the register page, the outer card is one developer's work (red),
 while the heading, subtitle, and checklist inside it were written by another (green):
 
-![Nested sections owned by two developers](docs/sections.jpg)
+![Nested sections owned by two developers](https://raw.githubusercontent.com/yuvrajdahal/builtby/main/docs/sections.jpg)
 
 **Hover a badge for the details.** Author, file and line range, how much of it they wrote, and the commit.
 Everyone else's rings fade out:
 
-![Tooltip with author, file, ownership, and commit](docs/tooltip.jpg)
+![Tooltip with author, file, ownership, and commit](https://raw.githubusercontent.com/yuvrajdahal/builtby/main/docs/tooltip.jpg)
 
 ## Supported setups
 
@@ -71,7 +81,7 @@ npm run dev
 
 The plugin only runs on the dev server (`vite` / `npm run dev`). `vite build` output contains no builtby code.
 
-![builtby on a React + Vite app: navbar, page layout, and pricing cards by three developers](docs/react-vite.jpg)
+![builtby on a React + Vite app: navbar, page layout, and pricing cards by three developers](https://raw.githubusercontent.com/yuvrajdahal/builtby/main/docs/react-vite.jpg)
 
 ## Setup: Next.js
 
@@ -223,4 +233,4 @@ Re-run both commands after each change.
 
 ## License
 
-[MIT](LICENSE) © Yuvraj Dahal
+[MIT](https://github.com/yuvrajdahal/builtby/blob/main/LICENSE) © Yuvraj Dahal

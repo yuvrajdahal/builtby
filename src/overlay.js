@@ -99,6 +99,7 @@
       }
       .head { display: flex; align-items: center; gap: 8px; padding: 8px 10px; cursor: pointer; user-select: none; }
       .head b { font-weight: 700; letter-spacing: .02em; }
+      .logo { flex: none; display: block; }
       .head kbd { margin-left: auto; font: 10px ui-monospace, monospace; color: #8b8b98; border: 1px solid #33333d; border-radius: 4px; padding: 1px 4px; }
       .dot { width: 8px; height: 8px; border-radius: 50%; background: #555; }
       .on .dot { background: #2fd38a; box-shadow: 0 0 8px #2fd38a; }
@@ -127,7 +128,13 @@
     <div class="layer"></div>
     <div class="tip"></div>
     <div class="panel">
-      <div class="head"><span class="dot"></span><b>builtby</b><kbd>Alt+W</kbd></div>
+      <div class="head"><span class="dot"></span>
+        <svg class="logo" width="22" height="16" viewBox="0 0 22 16" aria-hidden="true">
+          <rect x="1.5" y="4.5" width="19" height="10" rx="3" fill="none" stroke="#ececf1" stroke-width="1.6"/>
+          <circle cx="4" cy="4" r="2.8" fill="#ff5c7a" stroke="#111116" stroke-width="1"/>
+          <circle cx="8.6" cy="4" r="2.8" fill="#3d9bff" stroke="#111116" stroke-width="1"/>
+          <circle cx="13.2" cy="4" r="2.8" fill="#2fd38a" stroke="#111116" stroke-width="1"/>
+        </svg><b>builtby</b><kbd>Alt+W</kbd></div>
       <div class="body"><div class="list"></div>
         <label class="opt"><input type="checkbox" class="collapse"> Merge nested same-author</label>
       </div>
