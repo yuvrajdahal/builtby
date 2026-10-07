@@ -29,13 +29,19 @@ Everyone else's rings fade out:
 
 ![Tooltip with author, file, ownership, and commit](docs/tooltip.jpg)
 
-## Requirements
+## Supported setups
 
-- Next.js 13+ using the **webpack** dev server. Turbopack is not supported yet.
-  - Next.js 13–15: `next dev` uses webpack by default.
-  - Next.js 16+: Turbopack is the default, so run `next dev --webpack`.
-- The project must be a **git repository** with `git` available on your PATH.
-- React (`.jsx` / `.tsx` files).
+| Setup | How | Status |
+|---|---|---|
+| **React + Vite** | `builtby/vite` plugin | ✅ Supported |
+| **Next.js 13+** (App or Pages Router) | `builtby/next` config wrapper | ✅ Supported (webpack dev server) |
+| Next.js with Turbopack | | ❌ Not yet. Use the webpack dev server (see below). |
+| Create React App / custom webpack | | 🚧 Planned |
+
+You also need:
+
+- A **git repository** with `git` available on your PATH.
+- Components written in **`.jsx` / `.tsx`** files.
 
 ## Install
 
@@ -43,7 +49,31 @@ Everyone else's rings fade out:
 npm install --save-dev builtby
 ```
 
-## Setup
+## Setup: React (Vite)
+
+Add the plugin to `vite.config.ts` (or `vite.config.js`):
+
+```ts
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import builtby from "builtby/vite";
+
+export default defineConfig({
+  plugins: [react(), builtby()],
+});
+```
+
+Then start the dev server as usual:
+
+```bash
+npm run dev
+```
+
+The plugin only runs on the dev server (`vite` / `npm run dev`). `vite build` output contains no builtby code.
+
+![builtby on a React + Vite app: navbar, page layout, and pricing cards by three developers](docs/react-vite.jpg)
+
+## Setup: Next.js
 
 Wrap your Next.js config with `withBuiltBy`.
 
@@ -85,22 +115,15 @@ export default withBuiltBy(nextConfig);
 
 If you already have a custom `webpack()` function in your config, keep it. builtby calls it first, then adds its own loader.
 
+Then start the dev server. builtby needs the **webpack** dev server:
+
+- **Next.js 13–15:** `npm run dev` (`next dev` uses webpack by default).
+- **Next.js 16+:** Turbopack is the default, so run `npx next dev --webpack`,
+  or change your `dev` script in `package.json` to `"next dev --webpack"`.
+
 ## Usage
 
-1. Start the dev server as usual:
-
-   ```bash
-   npm run dev
-   ```
-
-   On Next.js 16+, use webpack:
-
-   ```bash
-   npx next dev --webpack
-   ```
-
-   Or change your `dev` script in `package.json` to `"next dev --webpack"`.
-
+1. Start your dev server (see the setup section for your framework).
 2. Open your app in the browser. A small **builtby** panel appears in the bottom-right corner.
 3. Turn the overlay on by clicking the panel header, or press **Alt+W**.
 
@@ -131,7 +154,7 @@ If you already have a custom `webpack()` function in your config, keep it. built
   BUILTBY=0 npm run dev
   ```
 
-- `next build` / production: builtby does nothing. No attributes, no overlay, no extra bytes.
+- Production builds (`vite build`, `next build`): builtby does nothing. No attributes, no overlay, no extra bytes.
 
 ## Tips for teams
 
@@ -149,17 +172,19 @@ If you already have a custom `webpack()` function in your config, keep it. built
 
 ## How it works
 
-1. A webpack `pre` loader parses each `.jsx` / `.tsx` file and runs `git blame` on it.
+1. While your dev server compiles each `.jsx` / `.tsx` file (a Vite plugin or a webpack loader, depending on your setup),
+   builtby parses it and runs `git blame` on it.
 2. For every DOM element in the JSX (`div`, `button`, `motion.div`, ...), it works out who owns the most lines
    and adds a `data-builtby` attribute with the author, commit, and line range.
-3. Because the data lives in the rendered HTML, React Server Components work too.
+3. Because the data lives in the rendered HTML, Next.js Server Components work too.
 4. A small overlay script (plain JS inside a Shadow DOM, so your CSS can't break it) reads those attributes and draws the rings.
 
 ## Troubleshooting
 
 | Problem | Fix |
 |---|---|
-| No panel appears | Make sure the dev server runs on webpack: `next dev` on Next.js 13–15, `next dev --webpack` on Next.js 16+ (not Turbopack), and that the config is wrapped with `withBuiltBy`. Restart the dev server after changing the config. |
+| No panel appears (Vite) | Make sure `builtby()` is in the `plugins` array and you're running the dev server, not `vite preview`. Restart the dev server after changing the config. |
+| No panel appears (Next.js) | Make sure the dev server runs on webpack: `next dev` on Next.js 13–15, `next dev --webpack` on Next.js 16+ (not Turbopack), and that the config is wrapped with `withBuiltBy`. Restart the dev server after changing the config. |
 | Panel says "No tagged elements" | The project isn't a git repo, or the page only renders components from `node_modules`. |
 | Everything says "Uncommitted" | The files aren't committed yet. Commit them and refresh. |
 | Alt+W does nothing | Your desktop or browser may be using that shortcut. Click the panel header instead. |
@@ -167,8 +192,9 @@ If you already have a custom `webpack()` function in your config, keep it. built
 
 ## Roadmap
 
-- Vite plugin (React, Vue, Svelte)
 - Turbopack support
+- Create React App / custom webpack setup
+- Vue and Svelte (Vite)
 - "Changed since `main`" filter for reviewing PRs
 - Links to the commit or PR on GitHub / GitLab
 - Chrome extension for staging URLs
@@ -183,13 +209,17 @@ cd builtby
 npm install
 ```
 
-Then point a Next.js app at your local copy:
+Then try your changes in a real app. The simplest way is to pack builtby and install the tarball, exactly like users get it from npm:
 
-```js
-// next.config.mjs in any Next.js app
-import withBuiltBy from "../builtby/src/next.js";
-export default withBuiltBy({});
+```bash
+# in the builtby folder
+npm pack
+
+# in a React (Vite) or Next.js app
+npm install --save-dev ../builtby/builtby-0.1.0.tgz
 ```
+
+Re-run both commands after each change.
 
 ## License
 

@@ -1,13 +1,14 @@
 {
   "name": "builtby",
   "version": "0.1.0",
-  "description": "See who built which part of your UI. git blame, drawn on the page.",
+  "description": "See who built which part of your UI. git blame, drawn on the running page. Works with React (Vite) and Next.js.",
   "license": "MIT",
   "main": "src/next.js",
   "exports": {
     "./next": "./src/next.js",
     "./loader": "./src/loader.js",
-    "./overlay": "./src/overlay.js"
+    "./overlay": "./src/overlay.js",
+    "./vite": "./src/vite.js"
   },
   "files": [
     "src"
@@ -18,13 +19,19 @@
     "devtools",
     "nextjs",
     "react",
-    "overlay"
+    "overlay",
+    "vite",
+    "vite-plugin"
   ],
   "peerDependencies": {
-    "next": ">=13"
+    "next": ">=13",
+    "vite": ">=4"
   },
   "peerDependenciesMeta": {
     "next": {
+      "optional": true
+    },
+    "vite": {
       "optional": true
     }
   },
