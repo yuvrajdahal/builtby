@@ -1,0 +1,40 @@
+{
+  "name": "whodid",
+  "version": "0.1.0",
+  "description": "See who built which part of your UI. git blame, drawn on the page.",
+  "license": "MIT",
+  "main": "src/next.js",
+  "exports": {
+    "./next": "./src/next.js",
+    "./loader": "./src/loader.js",
+    "./overlay": "./src/overlay.js"
+  },
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "git",
+    "blame",
+    "devtools",
+    "nextjs",
+    "react",
+    "overlay"
+  ],
+  "peerDependencies": {
+    "next": ">=13"
+  },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@babel/parser": "^7.25.0"
+  },
+  "author": "Yuvraj Dahal",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuvrajdahal/whodid.git"
+  },
+  "homepage": "https://github.com/yuvrajdahal/whodid#readme"
+}
