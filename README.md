@@ -6,7 +6,7 @@ When several developers work on one frontend, it's hard to tell who made which s
 builtby draws a colored ring and an avatar badge around each part of the page, one color per developer,
 straight from your git history.
 
-![builtby overlay on a Next.js page](docs/screenshot.jpg)
+![builtby showing three developers' work on one landing page](docs/hero.jpg)
 
 - **One color per developer.** Every element gets a ring and an initials badge for the person who owns most of its JSX lines.
 - **Commit details on hover.** Author, email, file and line range, ownership %, commit message, and when.
@@ -14,9 +14,26 @@ straight from your git history.
 - **No backend.** Blame runs inside your dev server. Nothing to deploy, no API keys.
 - **Dev only.** Production builds are untouched.
 
+## Example
+
+Here is builtby on [Sajha Samaj](https://github.com/aces-erc/taranga-1.0-software-hackathon__BCA-ASSOCIATION-MMAMC),
+a hackathon project built by a team of developers.
+
+**Sections by different people.** On the register page, the outer card is one developer's work (red),
+while the heading, subtitle, and checklist inside it were written by another (green):
+
+![Nested sections owned by two developers](docs/sections.jpg)
+
+**Hover a badge for the details.** Author, file and line range, how much of it they wrote, and the commit.
+Everyone else's rings fade out:
+
+![Tooltip with author, file, ownership, and commit](docs/tooltip.jpg)
+
 ## Requirements
 
-- Next.js 13+ using the default **webpack** dev server (`next dev`). Turbopack is not supported yet.
+- Next.js 13+ using the **webpack** dev server. Turbopack is not supported yet.
+  - Next.js 13–15: `next dev` uses webpack by default.
+  - Next.js 16+: Turbopack is the default, so run `next dev --webpack`.
 - The project must be a **git repository** with `git` available on your PATH.
 - React (`.jsx` / `.tsx` files).
 
@@ -76,6 +93,14 @@ If you already have a custom `webpack()` function in your config, keep it. built
    npm run dev
    ```
 
+   On Next.js 16+, use webpack:
+
+   ```bash
+   npx next dev --webpack
+   ```
+
+   Or change your `dev` script in `package.json` to `"next dev --webpack"`.
+
 2. Open your app in the browser. A small **builtby** panel appears in the bottom-right corner.
 3. Turn the overlay on by clicking the panel header, or press **Alt+W**.
 
@@ -134,7 +159,7 @@ If you already have a custom `webpack()` function in your config, keep it. built
 
 | Problem | Fix |
 |---|---|
-| No panel appears | Make sure you're running `next dev` (not `next dev --turbopack`) and the config is wrapped with `withBuiltBy`. Restart the dev server after changing the config. |
+| No panel appears | Make sure the dev server runs on webpack: `next dev` on Next.js 13–15, `next dev --webpack` on Next.js 16+ (not Turbopack), and that the config is wrapped with `withBuiltBy`. Restart the dev server after changing the config. |
 | Panel says "No tagged elements" | The project isn't a git repo, or the page only renders components from `node_modules`. |
 | Everything says "Uncommitted" | The files aren't committed yet. Commit them and refresh. |
 | Alt+W does nothing | Your desktop or browser may be using that shortcut. Click the panel header instead. |
