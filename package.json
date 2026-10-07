@@ -1,5 +1,5 @@
 {
-  "name": "whodid",
+  "name": "builtby",
   "version": "0.1.0",
   "description": "See who built which part of your UI. git blame, drawn on the page.",
   "license": "MIT",
@@ -34,7 +34,7 @@
   "author": "Yuvraj Dahal",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yuvrajdahal/whodid.git"
+    "url": "git+https://github.com/yuvrajdahal/builtby.git"
   },
-  "homepage": "https://github.com/yuvrajdahal/whodid#readme"
+  "homepage": "https://github.com/yuvrajdahal/builtby#readme"
 }

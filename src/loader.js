@@ -2,7 +2,7 @@ const { blameFile } = require("./blame");
 const { transform } = require("./transform");
 
 /** Webpack loader: tag JSX host elements with their git authorship. */
-module.exports = function whodidLoader(source) {
+module.exports = function builtbyLoader(source) {
   const callback = this.async();
   const file = this.resourcePath;
 
@@ -12,7 +12,7 @@ module.exports = function whodidLoader(source) {
   blameFile(file)
     .then((blame) => callback(null, blame ? transform(source, file, blame) : source))
     .catch((err) => {
-      this.emitWarning(new Error(`[whodid] ${file}: ${err.message}`));
+      this.emitWarning(new Error(`[builtby] ${file}: ${err.message}`));
       callback(null, source);
     });
 };

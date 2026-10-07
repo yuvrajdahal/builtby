@@ -1,6 +1,6 @@
 const { parse } = require("@babel/parser");
 
-const ATTR = "data-who";
+const ATTR = "data-builtby";
 const UNTRACKED = {
   sha: "0000000000000000000000000000000000000000",
   author: "Uncommitted",
@@ -61,7 +61,7 @@ function owner(lines, start, end) {
 }
 
 /**
- * Inject `data-who` onto every host JSX element. The value is a JSON tuple:
+ * Inject `data-builtby` onto every host JSX element. The value is a JSON tuple:
  * [file, startLine, endLine, author, email, sha, unixTime, summary, share]
  */
 function transform(source, filename, blame) {

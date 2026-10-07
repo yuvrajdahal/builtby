@@ -27,18 +27,18 @@ function gitRoot(dir) {
 
 /**
  * Wrap a Next.js config so `next dev` shows who built each part of the UI.
- * Inactive in production builds and when WHODID=0.
+ * Inactive in production builds and when BUILTBY=0.
  *
- *   module.exports = withWhodid({ ...yourConfig })
+ *   module.exports = withBuiltBy({ ...yourConfig })
  */
-function withWhodid(nextConfig = {}) {
+function withBuiltBy(nextConfig = {}) {
   return {
     ...nextConfig,
     webpack(config, context) {
       if (typeof nextConfig.webpack === "function") {
         config = nextConfig.webpack(config, context);
       }
-      if (!context.dev || process.env.WHODID === "0") return config;
+      if (!context.dev || process.env.BUILTBY === "0") return config;
 
       config.module.rules.unshift({
         test: /\.(jsx|tsx)$/,
@@ -51,7 +51,7 @@ function withWhodid(nextConfig = {}) {
         config.entry = injectOverlay(config.entry);
         config.plugins.push(
           new context.webpack.DefinePlugin({
-            __WHODID_ROOT__: JSON.stringify(gitRoot(context.dir)),
+            __BUILTBY_ROOT__: JSON.stringify(gitRoot(context.dir)),
           })
         );
       }
@@ -60,5 +60,5 @@ function withWhodid(nextConfig = {}) {
   };
 }
 
-module.exports = withWhodid;
-module.exports.withWhodid = withWhodid;
+module.exports = withBuiltBy;
+module.exports.withBuiltBy = withBuiltBy;

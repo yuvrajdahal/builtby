@@ -1,13 +1,13 @@
-// whodid overlay: draws who-built-what rings over elements tagged with `data-who`.
+// builtby overlay: draws who-built-what rings over elements tagged with `data-builtby`.
 // Framework-agnostic, no dependencies, lives in a Shadow DOM so page CSS can't touch it.
 
-(function whodid() {
-  if (typeof window === "undefined" || window.__whodid) return;
-  window.__whodid = true;
+(function builtby() {
+  if (typeof window === "undefined" || window.__builtby) return;
+  window.__builtby = true;
 
-  const ATTR = "data-who";
-  const STORE_KEY = "whodid:v1";
-  const ROOT = typeof __WHODID_ROOT__ !== "undefined" ? __WHODID_ROOT__ : "";
+  const ATTR = "data-builtby";
+  const STORE_KEY = "builtby:v1";
+  const ROOT = typeof __BUILTBY_ROOT__ !== "undefined" ? __BUILTBY_ROOT__ : "";
   const PALETTE = [
     "#ff5c7a", "#3d9bff", "#2fd38a", "#ffb020",
     "#b46bff", "#00c2c7", "#ff7a2f", "#e4e44a",
@@ -68,7 +68,7 @@
   }
 
   // ---------- DOM ----------
-  const host = document.createElement("whodid-root");
+  const host = document.createElement("builtby-root");
   host.style.cssText = "position:fixed;inset:0;z-index:2147483646;pointer-events:none;";
   const shadow = host.attachShadow({ mode: "open" });
   shadow.innerHTML = `
@@ -127,7 +127,7 @@
     <div class="layer"></div>
     <div class="tip"></div>
     <div class="panel">
-      <div class="head"><span class="dot"></span><b>whodid</b><kbd>Alt+W</kbd></div>
+      <div class="head"><span class="dot"></span><b>builtby</b><kbd>Alt+W</kbd></div>
       <div class="body"><div class="list"></div>
         <label class="opt"><input type="checkbox" class="collapse"> Merge nested same-author</label>
       </div>
