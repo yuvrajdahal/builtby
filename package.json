@@ -1,6 +1,6 @@
 {
   "name": "builtby",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "See who built which part of your UI. git blame, drawn on the running page. Works with React (Vite) and Next.js.",
   "license": "MIT",
   "main": "src/next.js",
