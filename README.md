@@ -26,8 +26,7 @@ straight from your git history.
 
 ## Example
 
-Here is builtby on [Sajha Samaj](https://github.com/aces-erc/taranga-1.0-software-hackathon__BCA-ASSOCIATION-MMAMC),
-a hackathon project built by a team of developers.
+Here is builtby on a real project built by a team of developers.
 
 **Sections by different people.** On the register page, the outer card is one developer's work (red),
 while the heading, subtitle, and checklist inside it were written by another (green):
